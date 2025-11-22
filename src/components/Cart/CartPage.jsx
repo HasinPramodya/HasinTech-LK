@@ -1,6 +1,9 @@
 import React from "react";
 import "./CartPage.css";
 import user from "../../assets/user.webp";
+import { Table } from "../Common/Table";
+import { QuantityInput } from "../SingleProductPage/QuantityInput";
+import remove from "../../assets/remove.png";
 
 export const CartPage = () => {
   return (
@@ -12,6 +15,18 @@ export const CartPage = () => {
           <p className="user_email">herly@gmail.com</p>
         </div>
       </div>
+
+      <Table headings={["item", "price", "quantity", "Total", "Remove"]}>
+      <tbody>
+        <tr>
+          <td>iphone 14</td>
+          <td>$999</td>
+          <td className="align-center table_quantity_input"><QuantityInput/></td>
+          <td>$999</td>
+          <td><img src={remove} alt="remove icon" className="cart_remove_icon" /></td>
+        </tr>
+      </tbody>
+      </Table>
 
       <table className="cart_bill">
         <tbody>
