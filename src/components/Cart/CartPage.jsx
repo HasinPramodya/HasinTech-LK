@@ -1,0 +1,36 @@
+import React from "react";
+import "./CartPage.css";
+import user from "../../assets/user.webp";
+
+export const CartPage = () => {
+  return (
+    <section className="align-center cart_page">
+      <div className="align-center user_info">
+        <img src={user} alt="" className="user_profile" />
+        <div>
+          <p className="user_name">Herly</p>
+          <p className="user_email">herly@gmail.com</p>
+        </div>
+      </div>
+
+      <table className="cart_bill">
+        <tbody>
+          <tr>
+            <td>Subtotal</td>
+            <td>$999</td>
+          </tr>
+          <tr>
+            <td>Shipping Charge</td>
+            <td>$5</td>
+          </tr>
+          <tr className="cart_bill_final">
+            <td>Total</td>
+            <td>$1004</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button className="search_button checkout_button">Checkout</button>
+    </section>
+  );
+};
