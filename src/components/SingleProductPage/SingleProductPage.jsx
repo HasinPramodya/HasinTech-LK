@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./SingleProductPage.css";
+import { QuantityInput } from "./QuantityInput";
 
 export const SingleProductPage = () => {
    const [selectedImage, setSelectedImage] = useState(0);
@@ -41,9 +42,7 @@ export const SingleProductPage = () => {
          <p className="single_product_price">${product.price.toFixed(2)}</p>
          <h2 className="quantity_title">Quantity:</h2>
          <div className="align-center quantity_input">
-            <button className="quantity_input_button" disabled>-</button>
-            <p className="quantity_input_count">1</p>
-            <button className="quantity_input_button" >+</button>
+            <QuantityInput/>
          </div>
          <button className="search_button add_cart">Add to Cart</button>
       </div>
