@@ -42,7 +42,7 @@ export const LoginPage = () => {
               value={user.name}
             />
             {/* show error */}
-            {errors.name && <p style={{ color: "red" }}>{errors.name[0]}</p>}
+            {errors.name && <p className="error_msg">{errors.name[0]}</p>}
           </div>
           <div>
             <label htmlFor="phone_number">Phone Number</label>
@@ -57,7 +57,7 @@ export const LoginPage = () => {
               value={user.phone_number}
             />
             
-            {errors.name && <p style={{ color: "red" }}>{errors.name[0]}</p>}
+            {errors.name && <p className="error_msg">{errors.name[0]}</p>}
           </div>
           <button className="search_button form_submit" onClick={handleSubmit}>
             Submit
