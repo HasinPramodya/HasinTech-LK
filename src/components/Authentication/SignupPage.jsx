@@ -24,6 +24,7 @@ const SignupPage = () => {
     });
 
     const [errors,setErrors] = useState({});
+    const [profilepic,setProfilepic]=useState(null);
     const handlesubmit=(e)=>{
         e.preventDefault();
         console.log(userDetails);
@@ -38,6 +39,7 @@ const SignupPage = () => {
     setErrors({}); // Clear errors
     console.log("Form submitted successfully", userDetails);   
     }
+    
     return (
         <section className='align-center form_page'>
             <form className='authentication_form signup_form' onSubmit={handlesubmit}>
@@ -45,12 +47,14 @@ const SignupPage = () => {
 
                 <div className='image_input_section'>
                     <div className='image_preview'>
-                        <img src={user} id='file-ip-1-preview' />
+                        <img src={profilepic ? URL.createObjectURL(profilepic) : user} id='file-ip-1-preview' />
                     </div>
                     <label htmlFor='file-ip-1' className='image_label'>
                         Upload Image
                     </label>
-                    <input type='file' id='file-ip-1' className='image_input' />
+                    <input type='file' id='file-ip-1' className='image_input' onChange={(e)=>{
+                        setProfilepic(e.target.files[0]);
+                    }}/>
                 </div>
 
                 {/* Form Inputs */}
