@@ -1,6 +1,6 @@
 import React from 'react'
 import './productsSidebar.css'
-import { NavLink } from '../NavBar/NavLink/NavLink'
+import { NavLinks } from '../NavBar/NavLinks/NavLinks'
 import rocket from '../../assets/rocket.png'
 
 export const ProductsSidebar = () => {
@@ -8,7 +8,7 @@ export const ProductsSidebar = () => {
     <aside className="products_sidebar">
         <h2>Category</h2>
         <div className="category_links">
-            <NavLink title="Electronics" link="products?category=electronics" emoji={rocket} sidebar={true} />
+            <NavLinks title="Electronics" link="products?category=electronics" emoji={rocket} sidebar={true} />
         </div>
     </aside>
   )
