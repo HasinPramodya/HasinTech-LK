@@ -48,6 +48,10 @@
     margin: 15px;
 }
 
+.navbar_links > a.active {
+    font-weight: 600;
+}
+
 .link_emoji{
     width: 25px;
     margin-right: 5px;
