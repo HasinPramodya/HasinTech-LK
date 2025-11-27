@@ -6,7 +6,8 @@ import idButton from '../../assets/id-button.png';
 import memo from '../../assets/memo.png';
 import order from '../../assets/package.png';
 import lock from '../../assets/locked.png';
-import { NavLink } from './NavLink/NavLink';
+import { NavLinks } from './NavLinks/NavLinks.jsx';
+import { NavLink } from "react-router-dom";
 
 
 
@@ -21,13 +22,13 @@ export const NavBar = () => {
         </form>
       </div>
       <div className='align-center navbar_links'>
-        <NavLink title="Home" link="/" emoji={rocket} />
-        <NavLink title="Products" link="/products" emoji={star} />
-        <NavLink title="Login" link="/login" emoji={idButton} />
-        <NavLink title="SignUp" link="/signup" emoji={memo} />
-        <NavLink title="My Orders" link="/myorders" emoji={order} />
-        <NavLink title="Logout" link="/logout" emoji={lock} />
-        <a href='/cart' className='align-center'>Cart <p className="align-center cart_counts">0</p></a>
+        <NavLinks title="Home" link="/" emoji={rocket} />
+        <NavLinks title="Products" link="/products" emoji={star} />
+        <NavLinks title="Login" link="/login" emoji={idButton} />
+        <NavLinks title="SignUp" link="/signup" emoji={memo} />
+        <NavLinks title="My Orders" link="/myorders" emoji={order} />
+        <NavLinks title="Logout" link="/logout" emoji={lock} />
+        <NavLink to='/cart' className='align-center'>Cart <p className="align-center cart_counts">0</p></NavLink>
       </div>
     </nav>
   )
