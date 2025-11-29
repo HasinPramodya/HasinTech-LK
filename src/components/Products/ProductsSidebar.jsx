@@ -13,7 +13,7 @@ export const ProductsSidebar = () => {
           {error && <em className="form_error">{error}</em>}
           {  
             categories && categories.map((category)=>{
-              return <NavLinks key={category.name} title={category.name} link={`products?category=${category.name}`} emoji={`http://localhost:5000/category/${category.image}`}  sidebar={true} />
+              return <NavLinks key={category.name} title={category.name} link={`/products?category=${category.name}`} emoji={`http://localhost:5000/category/${category.image}`}  sidebar={true} />
             })
           }
            
