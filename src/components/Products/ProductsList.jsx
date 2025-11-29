@@ -1,19 +1,11 @@
-import React, { useEffect, useState } from 'react'
 import './Productslist.css'
 import { ProductCard } from '../Home/ProductCard'
-import apiClient from '../../utils/api-client';
+import { useData } from '../../hooks/useData'
+
 
 export const ProductsList = () => {
-  const [products, setProducts] = useState([]);
-  const [error, setError] = useState([]);
-
-  useEffect(() =>{
-        apiClient.get("/products").then((res)=>{
-          setProducts(res.data.products);
-        }).catch((err)=>{
-          setError(err.message);
-        })
-  },[])
+  const {data, errors} = useData("/products");
+  console.log(data)
   return (
     <section className="products-list_section">Product list
       <header className="align-center products_list_header">
@@ -27,8 +19,9 @@ export const ProductsList = () => {
         </select>
       </header>
       <div className="products_list">
+        {errors && <em className="form_error">{errors}</em>}
         {
-          products.map((product)=>{
+          data?.products && data.products.map((product)=>{
             return <ProductCard key={product._id} id={product._id} image={product.images[0]} price={product.price} title={product.title} rating={product.reviews.rate} ratingCounts={product.reviews.counts} stock={product.stock}/>
           })
         }
