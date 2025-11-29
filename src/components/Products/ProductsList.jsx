@@ -1,11 +1,12 @@
 import './Productslist.css'
 import { ProductCard } from '../Home/ProductCard'
 import { useData } from '../../hooks/useData'
+import { ProductCardSkelton } from './ProductCardSkelton';
 
 
 export const ProductsList = () => {
-  const {data, errors} = useData("/products");
-  console.log(data)
+  const {data, errors, isLoading} = useData("/products");
+  const skelton = [1,2,3,4,5,6,7,8,9,10]
   return (
     <section className="products-list_section">Product list
       <header className="align-center products_list_header">
@@ -20,6 +21,9 @@ export const ProductsList = () => {
       </header>
       <div className="products_list">
         {errors && <em className="form_error">{errors}</em>}
+         {isLoading &&skelton.map((item)=>{
+          return <ProductCardSkelton key={item}/>
+        })}
         {
           data?.products && data.products.map((product)=>{
             return <ProductCard key={product._id} id={product._id} image={product.images[0]} price={product.price} title={product.title} rating={product.reviews.rate} ratingCounts={product.reviews.counts} stock={product.stock}/>
