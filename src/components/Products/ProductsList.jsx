@@ -2,10 +2,17 @@ import './Productslist.css'
 import { ProductCard } from '../Home/ProductCard'
 import { useData } from '../../hooks/useData'
 import { ProductCardSkelton } from './ProductCardSkelton';
+import { useSearchParams } from 'react-router-dom';
 
 
 export const ProductsList = () => {
-  const {data, errors, isLoading} = useData("/products");
+  const [search, setSearch] = useSearchParams();
+  const category = search.get("category")
+  const {data, errors, isLoading} = useData("/products", {
+    params: {
+      category : category
+    }
+  },[category]);
   const skelton = [1,2,3,4,5,6,7,8,9,10]
   return (
     <section className="products-list_section">Product list
