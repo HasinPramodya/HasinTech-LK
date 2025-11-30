@@ -3,6 +3,7 @@ import { ProductCard } from '../Home/ProductCard'
 import { useData } from '../../hooks/useData'
 import { ProductCardSkelton } from './ProductCardSkelton';
 import { useSearchParams } from 'react-router-dom';
+import { Pagination} from '../../common/pagination';
 
 
 export const ProductsList = () => {
@@ -36,18 +37,18 @@ export const ProductsList = () => {
       </header>
       <div className="products_list">
         {errors && <em className="form_error">{errors}</em>}
-         {isLoading &&skelton.map((item)=>{
+        { isLoading ? skelton.map((item)=>{
           return <ProductCardSkelton key={item}/>
-        })}
-        {
+        }) :
+        
           data?.products && data.products.map((product)=>{
             return <ProductCard key={product._id} id={product._id} image={product.images[0]} price={product.price} title={product.title} rating={product.reviews.rate} ratingCounts={product.reviews.counts} stock={product.stock}/>
           })
+        
         }
-
-        <button onClick={()=>handlePageChange(2)}>Page 2</button>
       </div>
 
+       {data && (<Pagination totalPosts={data.totalProducts} postsPerPage={8} onClick={handlePageChange} currentPage={page}/>)}
      
     </section>
   )
