@@ -16,7 +16,7 @@ export const ProductsList = () => {
       page,
     }
   },[category, page]);
-  const skelton = [1,2,3,4,5,6,7,8,9,10]
+  const skelton = [1,2,3,4,5,6,7,8]
 
   const handlePageChange = (page) => {
     const currentParams = Object.fromEntries([...search]);
