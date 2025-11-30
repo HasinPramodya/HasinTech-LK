@@ -16,7 +16,7 @@ export const Routing = () => {
             <Route path='/login' element={<LoginPage/>}/>
             <Route path='/signup' element={<SignupPage/>}/>
             <Route path='/products' element={<ProductsPage/>}/>
-            <Route path='/products/1' element={<SingleProductPage/>}/>
+            <Route path='/product/:id' element={<SingleProductPage/>}/>
             <Route path='/cart' element={<CartPage/>}/>
             <Route path='/myorders' element={<MyOrderPage/>}/>
         </Routes>
