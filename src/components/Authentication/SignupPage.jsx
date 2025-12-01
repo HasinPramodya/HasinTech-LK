@@ -2,6 +2,7 @@ import "./SignupPage.css";
 import user from "../../assets/user.webp";
 import { useState } from "react";
 import {z} from "zod";
+import { signUp } from "../../services/userServices";
 
 const signupSchema=z.object({
     name: z.string().min(3, { message: "Name should be at least 3 characters." }),  
@@ -25,25 +26,35 @@ const SignupPage = () => {
 
     const [errors,setErrors] = useState({});
     const [profilepic,setProfilepic]=useState(null);
-    const handlesubmit=(e)=>{
+    const handlesubmit = async (e) => {
         e.preventDefault();
-        console.log(userDetails);
 
-      const result =  signupSchema.safeParse(userDetails);
+        const result = signupSchema.safeParse(userDetails);
 
-      if (!result.success) {
-        const formattedErrors = result.error.flatten().fieldErrors;
-        setErrors(formattedErrors);
-        return;
-    }
-    setErrors({}); // Clear errors
-    console.log("Form submitted successfully", userDetails);   
+        if (!result.success) {
+            const formattedErrors = result.error.flatten().fieldErrors;
+            setErrors(formattedErrors);
+            return;
+        }
+
+        setErrors({}); // Clear errors
+
+        console.log("Form submitted successfully", userDetails);
+        try {
+            const res = await signUp(userDetails, profilepic);
+            console.log('Signup successful', res);
+            // TODO: redirect or show success message
+        } catch (err) {
+            console.error('Signup failed', err);
+            setErrors({ error: err.response.data.message });
+        }
     }
     
     return (
         <section className='align-center form_page'>
             <form className='authentication_form signup_form' onSubmit={handlesubmit}>
                 <h2>SignUp Form</h2>
+                {errors.general && <p className="error_msg">{errors.general}</p>}
 
                 <div className='image_input_section'>
                     <div className='image_preview'>
@@ -138,7 +149,7 @@ const SignupPage = () => {
                          {errors.address && <p className="error_msg">{errors.address[0]}</p>}
                     </div>
                 </div>
-
+               {errors.error && <em className="error_msg">{errors.error}</em>}
                 <button className='search_button form_submit' type='submit'>
                     Submit
                 </button>
