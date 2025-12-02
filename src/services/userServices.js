@@ -20,3 +20,7 @@ export function signUp(user, profilepic) {
         headers: { "Content-Type": "multipart/form-data" },
     });
 }
+
+export function login (user) {
+  return apiClient.post("/user/login", user);
+}
