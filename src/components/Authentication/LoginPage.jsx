@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import "./LoginPage.css";
 import { z } from "zod";
+import { login } from "../../services/userServices";
 
 const UserSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  phone_number: z
-    .string()
-    .min(10, "Phone number must be at least 10 characters")
-    .regex(/^[0-9]+$/, "Phone number must contain only digits"),
+  email: z.string().email({ message: "Please enter valid email." }),
+  password: z.string().min(8, { message: "Password must be at least 8 characters." }),
 });
 
 export const LoginPage = () => {
@@ -15,51 +13,66 @@ export const LoginPage = () => {
   // const phoneNumberRef = useRef(null);
   const [errors, setErrors] = useState({});
   const [user, setUser] = useState({
-    name: "",
-    phone_number: 0,
+    email: "",
+    password: "",
   });
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const result = UserSchema.safeParse(user);
     if (!result.success) {
-      setErrors(result.error.formErrors.fieldErrors);
+      const formatted = result.error.flatten().fieldErrors;
+      setErrors(formatted);
       return;
     }
+
+    setErrors({});
+    try {
+      const res = await login(user);
+      console.log("Login successful", res);
+      // TODO: store token / redirect on success
+    } catch (err) {
+      console.error("Login error", err);
+      const message = err?.response?.data?.message || err.message || "Login failed";
+      setErrors({ general: message });
+    }
   };
+
   return (
     <section className="align-center form_page">
-      <form action="" className="authentication_form">
+      <form action="" className="authentication_form" onSubmit={handleSubmit}>
         <h2>Login Form</h2>
         <div className="form_inputs">
           <div>
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name">Email</label>
             <input
-              type="text"
-              id="name"
+              type="email"
+              id="email"
               className="form_text_input"
               placeholder="Enter your name"
-              onChange={(e) => setUser({ ...user, name: e.target.value })}
-              value={user.name}
+              onChange={(e) => setUser({ ...user, email: e.target.value })}
+              value={user.email}
             />
             {/* show error */}
             {errors.name && <p className="error_msg">{errors.name[0]}</p>}
           </div>
           <div>
-            <label htmlFor="phone_number">Phone Number</label>
+            <label htmlFor="password">Password</label>
             <input
-              type="number"
-              id="phone_number"
+              type="text"
+              id="password"
               className="form_text_input"
               placeholder="Enter your phone number"
-              onChange={(e) =>
-                setUser({ ...user, phone_number: parseInt(e.target.value) })
-              }
-              value={user.phone_number}
+              onChange={(e) => setUser({ ...user, password: e.target.value })}
+              value={user.password}
             />
-            
-            {errors.name && <p className="error_msg">{errors.name[0]}</p>}
+            {errors.password && (
+              <p className="error_msg">{errors.password[0]}</p>
+            )}
+            {errors.general && (
+              <em className="form_error">{errors.general}</em>
+            )}
           </div>
-          <button className="search_button form_submit" onClick={handleSubmit}>
+          <button type="submit" className="search_button form_submit">
             Submit
           </button>
         </div>
