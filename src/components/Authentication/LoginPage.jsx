@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./LoginPage.css";
 import { z } from "zod";
 import { login } from "../../services/userServices";
+import { useNavigate } from "react-router-dom";
 
 const UserSchema = z.object({
   email: z.string().email({ message: "Please enter valid email." }),
@@ -16,6 +17,7 @@ export const LoginPage = () => {
     email: "",
     password: "",
   });
+  // const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const result = UserSchema.safeParse(user);
@@ -28,8 +30,10 @@ export const LoginPage = () => {
     setErrors({});
     try {
       const res = await login(user);
-      console.log("Login successful", res);
-      // TODO: store token / redirect on success
+      console.log("Login successful", res.data);
+      // store token in local storage
+      localStorage.setItem("token", res.data.token);
+      window.location.href = '/'
     } catch (err) {
       console.error("Login error", err);
       const message = err?.response?.data?.message || err.message || "Login failed";

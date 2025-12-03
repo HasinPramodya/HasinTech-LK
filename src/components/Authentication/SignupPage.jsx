@@ -3,6 +3,7 @@ import user from "../../assets/user.webp";
 import { useState } from "react";
 import {z} from "zod";
 import { signUp } from "../../services/userServices";
+import { useNavigate } from "react-router-dom";
 
 const signupSchema=z.object({
     name: z.string().min(3, { message: "Name should be at least 3 characters." }),  
@@ -26,6 +27,7 @@ const SignupPage = () => {
 
     const [errors,setErrors] = useState({});
     const [profilepic,setProfilepic]=useState(null);
+    const navigate=useNavigate();
     const handlesubmit = async (e) => {
         e.preventDefault();
 
@@ -44,6 +46,7 @@ const SignupPage = () => {
             const res = await signUp(userDetails, profilepic);
             console.log('Signup successful', res);
             // TODO: redirect or show success message
+           window.location.href="/";
         } catch (err) {
             console.error('Signup failed', err);
             setErrors({ error: err.response.data.message });
