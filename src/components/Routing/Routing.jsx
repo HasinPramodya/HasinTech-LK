@@ -7,6 +7,7 @@ import { Home } from "../Home/Home";
 import { MyOrderPage } from "../MyOrder/MyOrderPage";
 import { ProductsPage } from "../Products/ProductsPage";
 import { SingleProductPage } from "../SingleProductPage/SingleProductPage";
+import { LogOut } from '../Authentication/LogOut';
 
 export const Routing = () => {
   return (
@@ -19,6 +20,7 @@ export const Routing = () => {
             <Route path='/product/:id' element={<SingleProductPage/>}/>
             <Route path='/cart' element={<CartPage/>}/>
             <Route path='/myorders' element={<MyOrderPage/>}/>
+            <Route path='/logout' element={<LogOut/>}/>
         </Routes>
     </div>
   )
