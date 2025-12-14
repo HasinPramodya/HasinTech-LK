@@ -9,6 +9,7 @@ import { getUser } from "./services/userServices";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [cart,setCart] = useState([]);
 
  useEffect(() => {
   try {
@@ -27,7 +28,7 @@ function App() {
   return (
     <>
       <div className="app">
-        <NavBar user={user}/>
+        <NavBar user={user} cartCount= {cart.length}/>
         <main>
           <Routing />
         </main>
