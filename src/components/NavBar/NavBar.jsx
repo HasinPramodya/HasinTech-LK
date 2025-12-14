@@ -11,7 +11,7 @@ import { NavLink } from "react-router-dom";
 
 
 
-export const NavBar = ({user}) => {
+export const NavBar = ({user, cartCount}) => {
   return (
     <nav className='align-center navbar'>
       <div className='align-center'>
@@ -28,7 +28,7 @@ export const NavBar = ({user}) => {
         <NavLinks title="SignUp" link="/signup" emoji={memo} /></>}
         {user && <><NavLinks title="My Orders" link="/myorders" emoji={order} />
         <NavLinks title="Logout" link="/logout" emoji={lock} />
-        <NavLink to='/cart' className='align-center'>Cart <p className="align-center cart_counts">0</p></NavLink></>}
+        <NavLink to='/cart' className='align-center'>Cart <p className="align-center cart_counts">{cartCount}</p></NavLink></>}
       </div>
     </nav>
   )
