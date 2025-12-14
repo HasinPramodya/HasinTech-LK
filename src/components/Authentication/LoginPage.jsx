@@ -29,10 +29,7 @@ export const LoginPage = () => {
 
     setErrors({});
     try {
-      const res = await login(user);
-      console.log("Login successful", res.data);
-      // store token in local storage
-      localStorage.setItem("token", res.data.token);
+       login(user);
       window.location.href = '/'
     } catch (err) {
       console.error("Login error", err);
