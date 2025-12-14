@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
+import { logout } from '../../services/userServices';
+
 
 export const LogOut = () => {
-   
-  useEffect(()=>{
-      localStorage.removeItem('token');
+useEffect(()=>{
+      logout();
       window.location.href = '/';
       
   },[])
