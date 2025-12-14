@@ -29,8 +29,8 @@ export const LoginPage = () => {
 
     setErrors({});
     try {
-       login(user);
-      window.location.href = '/'
+      await login(user);
+      window.location.href = '/';
     } catch (err) {
       console.error("Login error", err);
       const message = err?.response?.data?.message || err.message || "Login failed";
