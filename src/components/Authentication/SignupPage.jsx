@@ -43,8 +43,8 @@ const SignupPage = () => {
 
         console.log("Form submitted successfully", userDetails);
         try {
-            const res = await signUp(userDetails, profilepic);
-            console.log('Signup successful', res);
+            signUp(userDetails, profilepic);
+           
             // TODO: redirect or show success message
            window.location.href="/";
         } catch (err) {
