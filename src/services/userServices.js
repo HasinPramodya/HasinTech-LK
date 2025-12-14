@@ -1,6 +1,9 @@
 import apiClient from "../utils/api-client";
+import { jwtDecode } from "jwt-decode";
 
-export function signUp(user, profilepic) {
+const tokenName = "token";
+
+export async function signUp(user, profilepic) {
     const body = new FormData();
 
     body.append("name", user.name || "");
@@ -16,11 +19,27 @@ export function signUp(user, profilepic) {
     }
 
     // Note: endpoint corrected from '/user/sinup' -> '/user/signup'
-    return apiClient.post("/user/signup", body, {
+    const { data } = await apiClient.post("/user/signup", body, {
         headers: { "Content-Type": "multipart/form-data" },
     });
+
+    localStorage.setItem(tokenName, data.token);
 }
 
-export function login (user) {
-  return apiClient.post("/user/login", user);
+export async function login (user) {
+  const {data} = await  apiClient.post("/user/login", user);
+  localStorage.setItem(tokenName, data.token);
+  console.log(data.token);
+
+}
+
+export function logout() {
+  localStorage.removeItem(tokenName);
+}
+
+
+export function getUser() {
+    const jwt =localStorage.getItem(tokenName);
+    const jwtUser = jwtDecode(jwt);
+    return jwtUser;
 }
