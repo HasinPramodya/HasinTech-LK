@@ -19,18 +19,32 @@ function App() {
           location.reload();
         }else{
           setUser(user);
-        }  
-      }catch (error) {
+        }
+      } catch (error) {
         console.log(error);
       }
-      
- },[user])
+      // Run once on mount to read token from localStorage and set user
+ }, [])
+
+ const addToCart = (product,quantity) => {
+    const updatedCart = [...cart];
+    const productIndex = updatedCart.findIndex((item)=>{return item.product._id === product._id})
+
+    if(productIndex === -1){
+      updatedCart.push({product:product,quantity: quantity});
+    }else{
+      updatedCart[productIndex].quantity += quantity;
+    }
+    setCart(updatedCart);
+    
+    console.log(updatedCart)
+ }
   return (
     <>
       <div className="app">
         <NavBar user={user} cartCount= {cart.length}/>
         <main>
-          <Routing />
+          <Routing addToCart={addToCart}/>
         </main>
       </div>
     </>
