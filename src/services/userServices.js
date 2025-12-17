@@ -43,3 +43,7 @@ export function getUser() {
     const jwtUser = jwtDecode(jwt);
     return jwtUser;
 }
+
+export function getJwt() {
+  return localStorage.getItem(tokenName);
+}

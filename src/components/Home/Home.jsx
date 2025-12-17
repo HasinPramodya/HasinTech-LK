@@ -7,9 +7,9 @@ import { FeaturedProduct } from './FeaturedProduct'
 export const Home = () => {
   return (
     <div>
-      <HeroSection title="Buy iphonre 14 pro" subtitle="E$xperince the power of the latest iphone 14 with our most Pro cemera ever" link="/"image={iPhoneHero}/>
+      <HeroSection title="Buy iphonre 14 pro" subtitle="E$xperince the power of the latest iphone 14 with our most Pro cemera ever" link="/product/6927d80949dc2f5aa6442111"image={iPhoneHero}/>
       <FeaturedProduct/>
-      <HeroSection title="Build the ultimate setup" subtitle="You can add Studio Dispaly and colour-matched Magic acessories to your bag after configure your Mac mini" link="/"image={mac}/>
+      <HeroSection title="Build the ultimate setup" subtitle="You can add Studio Dispaly and colour-matched Magic acessories to your bag after configure your Mac mini" link="/product/6927d9e949dc2f5aa644211b"image={mac}/>
         
         
     </div>

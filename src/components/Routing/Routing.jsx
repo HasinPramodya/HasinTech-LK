@@ -9,7 +9,7 @@ import { ProductsPage } from "../Products/ProductsPage";
 import { SingleProductPage } from "../SingleProductPage/SingleProductPage";
 import { LogOut } from '../Authentication/LogOut';
 
-export const Routing = ({addToCart}) => {
+export const Routing = () => {
   return (
     <div>
         <Routes>
@@ -17,8 +17,8 @@ export const Routing = ({addToCart}) => {
             <Route path='/login' element={<LoginPage/>}/>
             <Route path='/signup' element={<SignupPage/>}/>
             <Route path='/products' element={<ProductsPage/>}/>
-            <Route path='/product/:id' element={<SingleProductPage addToCart={addToCart}/>}/>
-            <Route path='/cart' element={<CartPage/>}/>
+            <Route path='/product/:id' element={<SingleProductPage />}/>
+            <Route path='/cart' element={<CartPage />}/>
             <Route path='/myorders' element={<MyOrderPage/>}/>
             <Route path='/logout' element={<LogOut/>}/>
         </Routes>

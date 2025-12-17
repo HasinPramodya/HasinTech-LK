@@ -10,13 +10,16 @@ export const ProductsList = () => {
   const [search, setSearch] = useSearchParams();
   const page = search.get("page");
   const category = search.get("category")
+  const serachQuary = search.get("search");
   const {data, errors, isLoading} = useData("/products", {
     params: {
+      search: serachQuary,
       category,
       page,
     }
-  },[category, page]);
+  },[serachQuary, category, page]);
   const skelton = [1,2,3,4,5,6,7,8]
+  
 
   const handlePageChange = (page) => {
     const currentParams = Object.fromEntries([...search]);
@@ -37,15 +40,12 @@ export const ProductsList = () => {
       </header>
       <div className="products_list">
         {errors && <em className="form_error">{errors}</em>}
-        { isLoading ? skelton.map((item)=>{
-          return <ProductCardSkelton key={item}/>
-        }) :
         
-          data?.products && data.products.map((product)=>{
-            return <ProductCard key={product._id} id={product._id} image={product.images[0]} price={product.price} title={product.title} rating={product.reviews.rate} ratingCounts={product.reviews.counts} stock={product.stock}/>
-          })
-        
+        { isLoading ? skelton.map((n) => <ProductCardSkelton key={n}/>) :
+          data?.products && data.products.map((product) => <ProductCard key={product._id} id={product._id} image={product.images[0]} price={product.price} title={product.title} rating={product.reviews.rate} ratingCounts={product.reviews.counts} stock={product.stock}/>)
+          
         }
+        
       </div>
 
        {data && (<Pagination totalPosts={data.totalProducts} postsPerPage={8} onClick={handlePageChange} currentPage={page}/>)}
